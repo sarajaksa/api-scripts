@@ -8,7 +8,7 @@ OPEN_LIBRARY_COVER_SIZES = ["M", "S", "L"]
 
 def get_cobiss_data(cobiss_url):
     book_data = {}
-    book_page = requests.get(cobiss_url)
+    book_page = requests.get("https://" + cobiss_url)
     if not book_page.ok:
         return book_data
     book_data[BIB_CONSTS.BOOK_LINK] = cobiss_url
@@ -203,6 +203,7 @@ def standardize_lang(lang):
         'jp': "jp",
         'de': "de",
         "sl": "sl",
+        "it": "it",
     }
     return LANG_MAP[lang]
 
