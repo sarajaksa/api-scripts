@@ -12,4 +12,3 @@ BOOK_LOCATION = "book-location"
 TIMESTAMP = "timestamp"
 
 AO3_BASE_URL = "https://archiveofourown.org"
-AO3_USER_AGENT = "Sara's bot (contact sarajaksa@sarajaksa.eu)"

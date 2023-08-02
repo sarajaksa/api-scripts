@@ -1,1 +1,2 @@
 COOKIES = ""
+AO3_USER_AGENT = "bot"

@@ -3,7 +3,8 @@ import requests
 import datetime
 from bs4 import BeautifulSoup
 from credentials import COOKIES
-from consts import AO3_USER_AGENT, AO3_BASE_URL
+from consts import AO3_BASE_URL
+from credentials import AO3_USER_AGENT
 
 def get_comment_from_comment_id(comment_id):
     comment_url = AO3_BASE_URL + "/comments/" + str(comment_id)
