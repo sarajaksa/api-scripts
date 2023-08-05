@@ -29,7 +29,3 @@ def application(environ, start_response):
         start_response('200 OK', [('Content-Type', 'text/plain;charset=utf-8')])
         message = 'It works!\n'
         return [message.encode()]
-
-
-image = get_book_image("282348032")
-print(image)
