@@ -18,7 +18,7 @@ def application(environ, start_response):
         start_response('200 OK', [('Content-Type', 'text/plain;charset=utf-8')])
         message = get_bib_data_from_isbn(environ['REQUEST_URI'].replace("/book/isbn/", ""))
         return [message.encode()]
-    if environ['REQUEST_URI'].startswith("/book/image/"):
+    if environ['REQUEST_URI'].startswith("/book/cover/"):
         message = get_book_image(environ['REQUEST_URI'].replace("/book/image/", ""))
         if message:
             start_response('200 OK', [('Content-Type', 'image/png')])
