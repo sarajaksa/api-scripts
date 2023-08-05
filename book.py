@@ -224,6 +224,8 @@ def get_book_image_from_google(isbn):
     if not book_search_data.ok:
         return None
     book_json = book_search_data.json()
+    if 'totalItems' in book_json and book_json['totalItems'] == 0:
+        return None
     if not 'imageLinks' in book_json['items'][0]['volumeInfo']:
         return None
     for cover_link in book_json['items'][0]['volumeInfo']['imageLinks'].values():
@@ -255,7 +257,10 @@ def get_book_image_from_goodreads(isbn):
     if not book_page.ok:
         return None
     book_soup = BeautifulSoup(book_page.text, features="html.parser")
-    cover_link = book_soup.find('img', class_="ResponsiveImage")['src']
+    cover_element = book_soup.find('img', class_="ResponsiveImage")
+    if not cover_element:
+        return None
+    cover_link = cover_element['src']
     cover_data = requests.get(cover_link)
     if cover_data.ok:
         return cover_data.content
