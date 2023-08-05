@@ -277,6 +277,7 @@ def get_book_image_from_bookfinder(isbn):
     if cover_data.ok:
         return cover_data.content
     return None
+
 def get_book_image_from_isbn(isbn):
     google_image = get_book_image_from_google(isbn)
     if google_image:
@@ -291,6 +292,7 @@ def get_book_image_from_isbn(isbn):
     if bookfinder:
         return bookfinder
     return None
+
 def get_book_image_from_cobiss_id(cobiss_id):
     cobiss_url = "https://plus.cobiss.net/cobiss/si/sl/bib/" + str(cobiss_id)
     book_page = requests.get(cobiss_url)
@@ -305,7 +307,7 @@ def get_book_image_from_cobiss_id(cobiss_id):
     return cover_data.content
 
 def get_book_image(isbn_or_cobiss_id):
-    book_id = re.sub("[^\d]]", "", isbn_or_cobiss_id)
+    book_id = re.sub("[^\d]", "", isbn_or_cobiss_id)
     if len(book_id) == 10 or len(book_id) == 13:
         return get_book_image_from_isbn(book_id)
     return get_book_image_from_cobiss_id(book_id)
