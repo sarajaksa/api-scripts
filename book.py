@@ -11,7 +11,7 @@ def get_cobiss_data(cobiss_url):
     book_page = requests.get("https://" + cobiss_url)
     if not book_page.ok:
         return book_data
-    book_data[BIB_CONSTS.BOOK_LINK] = book_page
+    book_data[BIB_CONSTS.BOOK_LINK] = "https://" + cobiss_url
     if "/mkl-71/" in cobiss_url:
         book_data[BIB_CONSTS.BOOK_LOCATION] = "Mestna Knjižnica Ljubljana - Rudnik"
     if "/mkl/" in cobiss_url:
