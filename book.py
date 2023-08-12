@@ -77,7 +77,7 @@ def collect_open_library_data(isbn):
         return book_data
     work_data_json = work_data.json()
     if 'authors' in work_data_json:
-        authors = [author["author"]["key"] for author in work_data_json['authors'] if author['type']['key'] == "/type/author_role"]
+        authors = [author["author"]["key"] for author in work_data_json['authors'] if author['type'] == "/type/author_role" or author['type']['key'] == "/type/author_role"]
         authors_names = []
         for author in authors:
             author_url = 'https://openlibrary.org' + author + ".json"
