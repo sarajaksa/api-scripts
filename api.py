@@ -12,7 +12,7 @@ def application(environ, start_response):
         return [message.encode()]
     if environ['REQUEST_URI'].startswith("/book/cobiss/"):
         start_response('200 OK', [('Content-Type', 'text/plain;charset=utf-8')])
-        message = change_data_to_bib(get_cobiss_data(environ['REQUEST_URI'].replace("/book/cobiss/", "")))
+        message = change_data_to_bib(get_cobiss_data(environ['REQUEST_URI'].replace("/book/cobiss/https:/", "")))
         return [message.encode()]
     if environ['REQUEST_URI'].startswith("/book/isbn/"):
         start_response('200 OK', [('Content-Type', 'text/plain;charset=utf-8')])
