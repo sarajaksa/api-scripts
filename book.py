@@ -14,8 +14,13 @@ def get_cobiss_data(cobiss_url):
     book_data[BIB_CONSTS.BOOK_LINK] = "https://" + cobiss_url
     if "/mkl-71/" in cobiss_url:
         book_data[BIB_CONSTS.BOOK_LOCATION] = "Mestna Knjižnica Ljubljana - Rudnik"
-    if "/mkl/" in cobiss_url:
+    elif "/mkl-50/" in cobiss_url:
+        book_data[BIB_CONSTS.BOOK_LOCATION] = "Mestna Knjižnica Ljubljana - KOŽ"
+    elif "/mkl/" in cobiss_url:
         book_data[BIB_CONSTS.BOOK_LOCATION] = "Mestna Knjižnica Ljubljana"
+    else:
+        book_data[BIB_CONSTS.BOOK_LOCATION] = "Other Libraries"
+
     book_data[BIB_CONSTS.TIMESTAMP] = "Future"
     book_soup = BeautifulSoup(book_page.text, features="html.parser")
     book_data[BIB_CONSTS.TITLE] = book_soup.find('div', class_="recordTitle").text
