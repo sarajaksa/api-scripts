@@ -1,0 +1,5 @@
+requests
+bs4
+lxml
+feedgen
+granary @ git+https://github.com/sarajaksa/granary.git#egg=granary
