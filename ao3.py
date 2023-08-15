@@ -6,6 +6,8 @@ from credentials import COOKIES
 from consts import AO3_BASE_URL
 from credentials import AO3_USER_AGENT
 
+from granary import ao3, rss
+
 def get_comment_from_comment_id(comment_id):
     comment_url = AO3_BASE_URL + "/comments/" + str(comment_id)
     data = requests.get(comment_url, headers={"cookie": COOKIES, "user-agent": AO3_USER_AGENT })
@@ -35,3 +37,8 @@ def get_comment_from_comment_id(comment_id):
 <a class=\"u-in-reply-to\" href=\"{story_link}\">Story Link</a> {reply_element} <a class=\"u-syndication\" href=\"{comment_url}\">Comment Link</a>
 
 {comment_text}"""
+
+def get_rss_feed(ao3_url):
+    ao3_url = "https://" + ao3_url
+    return rss.from_activities(ao3.ArchiveOfOurOwn().url_to_activities(ao3_url), feed_url=ao3_url.replace("https://archiveofourown.org/", "http://api.sarajaksa.eu/ao3/rss/"))
+
