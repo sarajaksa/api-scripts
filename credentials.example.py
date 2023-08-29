@@ -1,2 +1,4 @@
 COOKIES = ""
 AO3_USER_AGENT = "bot"
+AO3_USERNAME = ""
+AO3_PASSWORD = ""
