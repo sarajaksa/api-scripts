@@ -1,6 +1,7 @@
 import requests
 import bs4
 import json
+import time
 
 def send_webmentions(article_url):
     page = requests.get(article_url)
@@ -9,6 +10,7 @@ def send_webmentions(article_url):
     all_links_with_webmentions = []
     for link in links_to_check:
         print(link)
+        time.sleep(2)
         try:
             data = requests.get(link)
         except:
