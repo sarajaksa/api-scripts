@@ -1,4 +1,5 @@
 import requests
+from credentials import AO3_USERNAME, AO3_PASSWORD 
 
 AUTH_TOKEN_URL = "https://archiveofourown.org/token_dispenser.json"
 LOGIN_URL = "https://archiveofourown.org/users/login"
@@ -10,15 +11,15 @@ def detect_logged_out_session(html_string):
     return LOGIN_HTML in html_string
 
 
-def get_ao3_cookies(username, password):
+def get_ao3_cookies():
     response = requests.get(AUTH_TOKEN_URL)
     if not response.ok:
         return ""
     auth_token = response.json()["token"]
     auth_post_data = {
         'authenticity_token': auth_token,
-        'user[login]': username,
-        'user[password]': password + "33",
+        'user[login]': AO3_USERNAME,
+        'user[password]': AO3_PASSWORD,
         'commit': 'Log+In'
     }
     headers = {

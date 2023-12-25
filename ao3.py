@@ -2,17 +2,37 @@ import re
 import requests
 import datetime
 from bs4 import BeautifulSoup
-from credentials import COOKIES
+from credentials import COOKIES, AO3_USER_AGENT
 from consts import AO3_BASE_URL
-from credentials import AO3_USER_AGENT
+from ao3_auth import get_ao3_cookies, detect_logged_out_session
 
-from granary import ao3, rss
+
+
+#from granary import ao3, rss
 
 def get_comment_from_comment_id(comment_id):
+    global COOKIES
+
     comment_url = AO3_BASE_URL + "/comments/" + str(comment_id)
     data = requests.get(comment_url, headers={"cookie": COOKIES, "user-agent": AO3_USER_AGENT })
+
+    if not data.ok:
+        return "Could not access the page"
+
+    if detect_logged_out_session(data.text):
+        new_cookies = get_ao3_cookies()
+        COOKIES = new_cookies
+        data = requests.get(comment_url, headers={"cookie": new_cookies, "user-agent": AO3_USER_AGENT })
+
+    if not data.ok:
+        return "Could not access the page"
+
     soup = BeautifulSoup(data.text, features="lxml")
     comment_area = soup.find("div", class_="comments-show")
+
+    if not comment_area:
+        return "Could not find the comment on the page"
+
     title_element = comment_area.find("h3").find("a")
     title = title_element.text
     story_link = AO3_BASE_URL + title_element["href"]
