@@ -8,7 +8,7 @@ from ao3_auth import get_ao3_cookies, detect_logged_out_session
 
 
 
-#from granary import ao3, rss
+from granary import ao3, rss
 
 def get_comment_from_comment_id(comment_id):
     global COOKIES
