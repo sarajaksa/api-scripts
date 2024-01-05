@@ -53,6 +53,7 @@ def get_comment_from_comment_id(comment_id):
 .. date: {date}
 .. category: comment
 .. type: comment
+.. rss: False
 
 <a class=\"u-in-reply-to\" href=\"{story_link}\">Story Link</a> {reply_element} <a class=\"u-syndication\" href=\"{comment_url}\">Comment Link</a>
 
