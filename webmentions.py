@@ -9,8 +9,6 @@ def send_webmentions(article_url):
     links_to_check = [link["href"] for link in soup.find('article').find_all('a') if "http" in link["href"] and not "sarajaksa.eu" in link["href"]]
     all_links_with_webmentions = []
     for link in links_to_check:
-        print(link)
-        time.sleep(2)
         try:
             data = requests.get(link)
         except:
@@ -20,6 +18,7 @@ def send_webmentions(article_url):
         if not webmention_element and not pingback_element:
             continue
         elif webmention_element:
+            time.sleep(1)
             webmention_link = webmention_element["href"]
             payload = 'source=' + article_url + '&target=' + link
             headers = {
@@ -52,6 +51,7 @@ def send_webmentions(article_url):
                                     </param>
                                 </params>
                             </methodCall>"""
+            time.sleep(1)
             try:
                 response_pingback = requests.post(pingback_link, data=payload)
             except:
