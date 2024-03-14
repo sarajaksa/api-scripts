@@ -1,9 +1,7 @@
 import os
 import sys
-import json
 from ao3 import get_comment_from_comment_id, get_rss_feed
 from book import change_data_to_bib, get_cobiss_data, get_book_image, get_bib_data_from_isbn
-from webmentions import list_webmentions, send_webmentions
 
 sys.path.insert(0, os.path.dirname(__file__))
 
@@ -31,14 +29,6 @@ def application(environ, start_response):
             return [message]
         start_response('500 OK', [('Content-Type', 'text/plain;charset=utf-8')])
         return ["Server error"]
-    if environ['REQUEST_URI'].startswith("/webmention/send"):
-        start_response('200 OK', [('Content-Type', 'text/plain;charset=utf-8')])
-        message = send_webmentions(environ['REQUEST_URI'].replace("/webmention/send/https:/", "https://"))
-        return [message.encode()]
-    if environ['REQUEST_URI'].startswith("/webmention/check"):
-        start_response('200 OK', [('Content-Type', 'text/text;charset=utf-8')])
-        message = list_webmentions(environ['REQUEST_URI'].replace("/webmention/check/https:/", "https://"))
-        return [message.encode()]
     else:
         start_response('200 OK', [('Content-Type', 'text/plain;charset=utf-8')])
         message = 'It works!\n'
