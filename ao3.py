@@ -92,6 +92,6 @@ def get_comment_from_comment_id(comment_id, micropub_queries):
 
 
 def get_rss_feed(ao3_url):
-    ao3_url = "https://" + ao3_url
+    ao3_url = "https://archiveofourown.org" + ao3_url.replace("https://archiveofourown.org", "").replace("archiveofourown.org", "")
     return rss.from_activities(ao3.ArchiveOfOurOwn().url_to_activities(ao3_url), feed_url=ao3_url.replace("https://archiveofourown.org/", "http://api.sarajaksa.eu/ao3/rss/"))
 
