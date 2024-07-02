@@ -72,7 +72,7 @@ def get_comment_from_comment_id(comment_id, micropub_queries):
     post_data = {
         "message": f"Adding the AO3 comment with ID {comment_id}",
         "committer": {
-            "name": "Sara Jak分a",
+            "name": "Sara Jakša",
             "email": "sarajaksa@sarajaksa.eu"
         },
         "content": base64.encodebytes(str.encode(blog_comment_text)).decode("utf-8")
